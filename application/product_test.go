@@ -19,24 +19,14 @@ func TestProduct_Enable_OK(t *testing.T) {
 }
 
 func TestProduct_Enable_Error(t *testing.T) {
-	product := Product{
-		ID:     "1",
-		Name:   "P1",
-		Price:  0,
-		Status: "",
-	}
+	product := NewProduct(nil, nil)
 	err := product.Enable()
 	require.Error(t, err, "price must be greater than zero to enable the product")
-	require.Equal(t, "", product.Status)
+	require.Equal(t, DISABLED, product.Status)
 }
 
 func TestProduct_Disable_OK(t *testing.T) {
-	product := Product{
-		ID:     "1",
-		Name:   "P1",
-		Price:  0,
-		Status: "",
-	}
+	product := NewProduct(nil, nil)
 	err := product.Disable()
 	require.Nil(t, err)
 	require.Equal(t, DISABLED, product.Status)
@@ -62,7 +52,7 @@ func TestProduct_isValid_True(t *testing.T) {
 		Price:  5,
 		Status: DISABLED,
 	}
-	isValid, err := product.isValid()
+	isValid, err := product.IsValid()
 	require.Nil(t, err)
 	require.True(t, isValid)
 }
@@ -75,7 +65,7 @@ func TestProduct_isValid_False(t *testing.T) {
 		Price:  -4,
 		Status: "DLED",
 	}
-	isValid, err := product.isValid()
+	isValid, err := product.IsValid()
 
 	require.NotNil(t, err)
 	require.False(t, isValid)
