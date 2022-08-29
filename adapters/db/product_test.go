@@ -18,7 +18,7 @@ func setUp() {
 
 func createTable(db2 *sql.DB) {
 	table := ` create table products(id string, name string, price float,status string);`
-	statement, err := db.Prepare(table)
+	statement, err := db2.Prepare(table)
 	if err != nil {
 		log.Fatal(err.Error())
 	}

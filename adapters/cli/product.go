@@ -62,5 +62,6 @@ func Run(service application.ProductServiceInterface, action string,
 			product.GetPrice(),
 			product.GetStatus())
 	}
+	fmt.Printf(result)
 	return result, nil
 }
