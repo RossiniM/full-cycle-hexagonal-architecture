@@ -9,20 +9,10 @@ import (
 	"github.com/RossiniM/full-cycle-hexagonal-architecture/adapters/db"
 	"github.com/RossiniM/full-cycle-hexagonal-architecture/application"
 	"github.com/spf13/cobra"
-	"log"
 	"os"
 )
 
 var db1, _ = sql.Open("sqlite3", "productDB.db")
-
-func createTable(db2 *sql.DB) {
-	table := ` create table products(id string, name string, price float,status string);`
-	statement, err := db2.Prepare(table)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	statement.Exec()
-}
 
 var productDB = db.New(db1)
 var productService = application.ProductService{Persistence: productDB}
